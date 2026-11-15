@@ -1,0 +1,21 @@
+services:
+  contract-registry:
+    build: .
+    image: click-contract-registry:1.0.0
+    container_name: click-contract-registry
+    ports:
+      - "8000:8000"
+    environment:
+      CONTRACT_DB_PATH: /data/contracts.db
+    volumes:
+      - contract-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/health').status==200 else 1)"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  contract-data:

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "properties": {
+        "event_id": {"type": "string"},
+        "button": {"type": "string", "enum": ["left", "right", "middle"]},
+        "x": {"type": "integer", "minimum": 0, "maximum": 10000},
+        "y": {"type": "integer", "minimum": 0, "maximum": 10000},
+        "dwell_ms": {"type": ["integer", "null"], "minimum": 0, "maximum": 120000}
+      },
+      "required": ["event_id"],
+      "additionalProperties": false
+    }
+  ]
+}
